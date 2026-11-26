@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Select from "../../components/Select";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import {
   FormProvider,
@@ -138,21 +139,15 @@ function Basic() {
         <label htmlFor="category" className="text-sm font-medium">
           Category
         </label>
-        <select
-          id="category"
-          className={`${input} mt-1`}
-          aria-invalid={!!error}
-          {...register("category")}
-        >
-          <option value="">
-            {categories.isLoading ? "Loading categories…" : "Select category"}
-          </option>
-          {categories.data?.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name}
+        <Select {...register("category")}>
+          <option value="">Select category</option>
+
+          {categories.data?.map((category) => (
+            <option key={category.slug} value={category.slug}>
+              {category.name}
             </option>
           ))}
-        </select>
+        </Select>
         {categories.isError && (
           <button
             type="button"

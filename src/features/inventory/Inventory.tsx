@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { button, input, primary } from "../../components/styles";
+import Select from "../../components/Select";
 import {
   useGetCategoriesQuery,
   useGetProductQuery,
@@ -246,18 +247,20 @@ export function Inventory() {
     <>
       <label className="block text-sm font-medium">
         Category
-        <select
-          className={`${input} mt-1`}
+        <Select
           value={filters.category}
-          onChange={(e) => filter({ category: e.target.value })}
+          onChange={(e: { target: { value: any } }) =>
+            filter({ category: e.target.value })
+          }
         >
           <option value="">All categories</option>
-          {categories.data?.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name}
+
+          {categories.data?.map((category) => (
+            <option key={category.slug} value={category.slug}>
+              {category.name}
             </option>
           ))}
-        </select>
+        </Select>
       </label>
       {categories.isError && (
         <button className={button} onClick={() => categories.refetch()}>
@@ -266,17 +269,18 @@ export function Inventory() {
       )}
       <label className="block text-sm font-medium">
         Sort by
-        <select
-          className={`${input} mt-1`}
+        <Select
           value={filters.sort}
-          onChange={(e) => filter({ sort: e.target.value as Sort })}
+          onChange={(e: { target: { value: any } }) =>
+            filter({ sort: e.target.value as Sort })
+          }
         >
           <option value="default">Default</option>
           <option value="price_asc">Price: low to high</option>
           <option value="price_desc">Price: high to low</option>
           <option value="title_asc">Name: A–Z</option>
           <option value="title_desc">Name: Z–A</option>
-        </select>
+        </Select>
       </label>
       <button
         className={button}
@@ -382,7 +386,10 @@ export function Inventory() {
             className="m-4 rounded-lg bg-rose-50 p-4 text-rose-800"
           >
             Could not load products.{" "}
-            <button className="underline" onClick={() => query.refetch()}>
+            <button
+              className="underline cursor-pointer"
+              onClick={() => query.refetch()}
+            >
               Retry
             </button>
           </div>
@@ -529,7 +536,7 @@ export function Inventory() {
               <p role="alert" className="text-sm text-rose-700">
                 Could not load latest details.{" "}
                 <button
-                  className="underline"
+                  className="underline cursor-pointer"
                   onClick={() => detailQuery.refetch()}
                 >
                   Retry
@@ -621,7 +628,7 @@ export function Inventory() {
                 Cancel
               </button>
               <button
-                className="rounded-lg bg-rose-700 px-4 py-2 text-white"
+                className="rounded-lg bg-rose-700 px-4 py-2 text-white cursor-pointer"
                 onClick={() => {
                   const id = confirm.id;
                   setConfirm(null);
@@ -643,7 +650,7 @@ export function Inventory() {
           <div className="mt-2 flex gap-4">
             {toast.retry && (
               <button
-                className="font-semibold underline"
+                className="font-semibold underline cursor-pointer"
                 disabled={!!pending}
                 onClick={() => {
                   if (toast.retry) void mutate(toast.retry);
@@ -652,7 +659,10 @@ export function Inventory() {
                 Retry
               </button>
             )}
-            <button className="underline" onClick={() => setToast(null)}>
+            <button
+              className="underline cursor-pointer"
+              onClick={() => setToast(null)}
+            >
               Dismiss
             </button>
           </div>
