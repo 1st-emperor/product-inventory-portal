@@ -367,7 +367,9 @@ function Review({ edit }: { edit: (step: number) => void }) {
             {s.fields.map(([label, value]) => (
               <div key={label} className="min-w-0">
                 <dt className="text-xs text-slate-500">{label}</dt>
-                <dd className="break-words text-sm font-medium">{value}</dd>
+                <dd className="wrap-break-words text-sm font-medium">
+                  {value}
+                </dd>
               </div>
             ))}
           </dl>
