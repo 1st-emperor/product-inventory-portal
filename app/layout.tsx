@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { StoreProvider } from "../src/store/provider";
-// @ts-ignore Next.js handles CSS side-effect imports at build time.
 import "./globals.css";
 
 export const metadata: Metadata = {
