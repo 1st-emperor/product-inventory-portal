@@ -9,6 +9,3 @@ const baseField =
 export const input = `${baseField} px-3 py-2`;
 
 export const select = `${baseField} appearance-none cursor-pointer py-2 pl-3 pr-10`;
-
-// export const input =
-// "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-2 focus:outline-indigo-200";
