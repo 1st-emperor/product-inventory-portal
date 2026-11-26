@@ -139,8 +139,15 @@ function Basic() {
         <label htmlFor="category" className="text-sm font-medium">
           Category
         </label>
-        <Select {...register("category")}>
-          <option value="">Select category</option>
+        <Select
+          id="category"
+          aria-invalid={!!error}
+          aria-describedby={error ? "category-error" : undefined}
+          {...register("category")}
+        >
+          <option value="">
+            {categories.isLoading ? "Loading categories…" : "Select category"}
+          </option>
 
           {categories.data?.map((category) => (
             <option key={category.slug} value={category.slug}>
@@ -148,6 +155,7 @@ function Basic() {
             </option>
           ))}
         </Select>
+
         {categories.isError && (
           <button
             type="button"
@@ -157,8 +165,9 @@ function Basic() {
             Retry categories
           </button>
         )}
+
         {error && (
-          <p role="alert" className="text-xs text-rose-700">
+          <p id="category-error" role="alert" className="text-xs text-rose-700">
             {error.message}
           </p>
         )}

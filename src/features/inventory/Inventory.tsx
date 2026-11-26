@@ -245,9 +245,10 @@ export function Inventory() {
   }
   const filterControls = (
     <>
-      <label className="block text-sm font-medium">
+      <label htmlFor="category" className="block text-sm font-medium">
         Category
         <Select
+          id="category"
           value={filters.category}
           onChange={(e: { target: { value: any } }) =>
             filter({ category: e.target.value })
