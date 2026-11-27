@@ -5,7 +5,7 @@ Aplikasi pengelolaan produk dan inventaris yang responsif, dengan fitur pencaria
 ## Project links
 
 - GitHub: https://github.com/1st-emperor/product-inventory-portal
-- Vercel: (sedang dikerjakan)
+- Vercel: https://product-inventory-portal.vercel.app/products
 
 ## Technology
 
